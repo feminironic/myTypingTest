@@ -4,35 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meichn Typing Test | Improve Your Typing Skill</title>
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="assets/css/main.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="text-white">
+<body class="light-mode">
+    <!-- Background -->
     <div id="stars-container" class="fixed top-0 left-0 w-full h-full -z-10"></div>
     
     <!-- Planets -->
-    <div class="planet fixed -z-10" style="top: 15%; right: 10%; width: 100px; height: 100px; background: linear-gradient(45deg, #f97316, #f59e0b);"></div>
-    <div class="planet fixed -z-10" style="bottom: 20%; left: 5%; width: 150px; height: 150px; background: linear-gradient(45deg, #3b82f6, #2563eb);"></div>
+    <div class="planet fixed -z-10 light-mode-planet" style="top: 15%; right: 10%; width: 100px; height: 100px; background: linear-gradient(45deg, #fbbf24, #f59e0b);"></div>
+    <div class="planet fixed -z-10 light-mode-planet" style="bottom: 20%; left: 5%; width: 150px; height: 150px; background: linear-gradient(45deg, #60a5fa, #3b82f6);"></div>
     
     <div class="container mx-auto px-4 py-8">
         <!-- Header -->
-        <header class="flex flex-col md:flex-row justify-between items-center mb-8">
+        <header class="flex flex-col md:flex-row justify-between items-center mb-8 mx-20">
             <div class="flex items-center mb-4 md:mb-0">
-                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 flex items-center justify-center mr-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center mr-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                 </div>
-                <h1 class="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">Meichn Typing Test</h1>
+                <h1 class="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">Meichn Typing Test</h1>
             </div>
             <div class="flex space-x-4">
-                <button id="theme-toggle" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-all">
+                <button id="theme-toggle" class="px-4 py-2 rounded-full bg-indigo-100 hover:bg-indigo-200 transition-all text-indigo-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                 </button>
-                <button id="info-btn" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 transition-all">
+                <button id="info-btn" class="px-4 py-2 rounded-full bg-indigo-100 hover:bg-indigo-200 transition-all text-indigo-700">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -41,16 +42,16 @@
         </header>
 
         <!-- Main content -->
-        <main>
+        <main class="mx-20">
             <!-- Typing test section -->
-            <div id="typing-section" class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-white/10">
+            <div id="typing-section" class="bg-white/50 backdrop-blur-lg rounded-2xl p-6 mb-8 border border-indigo-200 shadow-lg">
                 <!-- Test settings -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <!-- Difficulty selector -->
                     <div>
                         <div class="flex items-center mb-2">
-                            <h3 class="text-white/70 mr-2">Difficulty:</h3>
-                            <button id="difficulty-info-btn" class="text-white/50 hover:text-white/80">
+                            <h3 class="text-indigo-900 mr-2">Difficulty:</h3>
+                            <button id="difficulty-info-btn" class="text-indigo-500 hover:text-indigo-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
@@ -58,19 +59,19 @@
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <div class="tooltip">
-                                <button class="difficulty-btn active px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-difficulty="easy">Novice</button>
+                                <button class="difficulty-btn active px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-difficulty="easy">Novice</button>
                                 <span class="tooltip-text">Simple space facts with basic vocabulary. Perfect for beginners.</span>
                             </div>
                             <div class="tooltip">
-                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-difficulty="medium">Pilot</button>
+                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-difficulty="medium">Pilot</button>
                                 <span class="tooltip-text">Moderate complexity with longer sentences about space exploration.</span>
                             </div>
                             <div class="tooltip">
-                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-difficulty="hard">Commander</button>
+                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-difficulty="hard">Commander</button>
                                 <span class="tooltip-text">Advanced vocabulary and complex sentences about astrophysics concepts.</span>
                             </div>
                             <div class="tooltip">
-                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-difficulty="expert">Cosmic Master</button>
+                                <button class="difficulty-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-difficulty="expert">Cosmic Master</button>
                                 <span class="tooltip-text">Expert level with scientific terminology and intricate concepts about cosmology.</span>
                             </div>
                         </div>
@@ -79,104 +80,104 @@
                     <!-- Timer selector -->
                     <div>
                         <div class="flex items-center mb-2">
-                            <h3 class="text-white/70 mr-2">Test Duration:</h3>
-                            <button id="timer-info-btn" class="text-white/50 hover:text-white/80">
+                            <h3 class="text-indigo-900 mr-2">Test Duration:</h3>
+                            <button id="timer-info-btn" class="text-indigo-500 hover:text-indigo-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                             </button>
                         </div>
                         <div class="flex flex-wrap gap-2">
-                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-time="15">15s</button>
-                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-time="30">30s</button>
-                            <button class="timer-btn active px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-time="60">1 min</button>
-                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-time="120">2 min</button>
-                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-purple-500 hover:bg-purple-500/20" data-time="300">5 min</button>
+                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-time="15">15s</button>
+                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-time="30">30s</button>
+                            <button class="timer-btn active px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-time="60">1 min</button>
+                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-time="120">2 min</button>
+                            <button class="timer-btn px-3 py-1 rounded-full text-sm border border-indigo-500 hover:bg-indigo-500/20" data-time="300">5 min</button>
                         </div>
                     </div>
                 </div>
 
                 <!-- Progress bar -->
-                <div class="w-full h-2 bg-white/10 rounded-full mb-6 overflow-hidden">
-                    <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full" style="width: 0%"></div>
+                <div class="w-full h-2 bg-indigo-100 rounded-full mb-6 overflow-hidden">
+                    <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-indigo-500 to-blue-500 rounded-full" style="width: 0%"></div>
                 </div>
 
                 <!-- Typing text display -->
-                <div class="typing-text text-lg md:text-xl bg-white/5 rounded-lg p-4 mb-6 leading-relaxed relative">
+                <div class="typing-text-wrapper text-lg md:text-xl bg-white/70 rounded-lg p-4 mb-6 leading-relaxed relative text-gray-800 shadow-inner mb-6">
                     <div id="typing-text" class="min-h-[100px]"></div>
-                    <div id="cursor" class="cursor-blink absolute h-5 w-0.5 bg-purple-400"></div>
+                    <div id="cursor" class="cursor-blink absolute h-5 w-0.5 bg-indigo-500"></div>
                 </div>
 
-                <!-- Input field (hidden during test) -->
+                <!-- Input field  -->
                 <div id="input-container" class="mb-6">
-                    <input type="text" id="typing-input" class="cosmic-input w-full px-4 py-3 rounded-lg text-white focus:outline-none" placeholder="Click 'Start Test' to begin typing..." disabled>
+                    <input type="text" id="typing-input" class="cosmic-input w-full px-4 py-3 rounded-lg focus:outline-none" placeholder="Click 'Start Test' to begin typing..." disabled>
                 </div>
 
                 <!-- Controls -->
                 <div class="flex flex-wrap gap-4 justify-between items-center">
                     <div>
-                        <button id="start-btn" class="cosmic-btn px-6 py-3 rounded-lg font-semibold">Start Test</button>
-                        <button id="reset-btn" class="hidden px-6 py-3 rounded-lg font-semibold bg-white/10 hover:bg-white/20 transition-all">Reset</button>
+                        <button id="start-btn" class="cosmic-btn text-white px-6 py-3 rounded-lg font-semibold">Start Test</button>
+                        <button id="reset-btn" class="hidden px-6 py-3 rounded-lg font-semibold bg-indigo-100 hover:bg-indigo-200 transition-all text-indigo-700">Reset</button>
                     </div>
                     <div class="flex gap-6">
                         <div class="text-center">
-                            <p class="text-white/70 text-sm">WPM</p>
-                            <p id="wpm" class="text-2xl font-bold">0</p>
+                            <p class="text-indigo-900 text-sm">WPM</p>
+                            <p id="wpm" class="text-2xl font-bold text-indigo-700">0</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-white/70 text-sm">Accuracy</p>
-                            <p id="accuracy" class="text-2xl font-bold">0%</p>
+                            <p class="text-indigo-900 text-sm">Accuracy</p>
+                            <p id="accuracy" class="text-2xl font-bold text-indigo-700">0%</p>
                         </div>
                         <div class="text-center">
-                            <p class="text-white/70 text-sm">Time</p>
-                            <p id="time" class="text-2xl font-bold">60s</p>
+                            <p class="text-indigo-900 text-sm">Time</p>
+                            <p id="time" class="text-2xl font-bold text-indigo-700">60s</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Results modal (hidden by default) -->
-            <div id="results-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
-                <div class="bg-gray-900 rounded-2xl p-8 max-w-md w-full mx-4 border border-purple-500/30">
-                    <h2 class="text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">Test Complete!</h2>
+            <!-- Results modal -->
+            <div id="results-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+                <div class="bg-white rounded-2xl p-8 max-w-md w-full mx-4 border border-indigo-200 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">Test Complete!</h2>
                     
                     <div class="grid grid-cols-2 gap-4 mb-6">
-                        <div class="bg-white/5 rounded-lg p-4 text-center">
-                            <p class="text-white/70 text-sm">Words Per Minute</p>
-                            <p id="result-wpm" class="text-3xl font-bold text-purple-400">0</p>
+                        <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                            <p class="text-indigo-900 text-sm">Words Per Minute</p>
+                            <p id="result-wpm" class="text-3xl font-bold text-indigo-600">0</p>
                         </div>
-                        <div class="bg-white/5 rounded-lg p-4 text-center">
-                            <p class="text-white/70 text-sm">Accuracy</p>
-                            <p id="result-accuracy" class="text-3xl font-bold text-indigo-400">0%</p>
+                        <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                            <p class="text-indigo-900 text-sm">Accuracy</p>
+                            <p id="result-accuracy" class="text-3xl font-bold text-blue-600">0%</p>
                         </div>
-                        <div class="bg-white/5 rounded-lg p-4 text-center">
-                            <p class="text-white/70 text-sm">Characters</p>
-                            <p id="result-chars" class="text-3xl font-bold text-blue-400">0</p>
+                        <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                            <p class="text-indigo-900 text-sm">Characters</p>
+                            <p id="result-chars" class="text-3xl font-bold text-sky-600">0</p>
                         </div>
-                        <div class="bg-white/5 rounded-lg p-4 text-center">
-                            <p class="text-white/70 text-sm">Errors</p>
-                            <p id="result-errors" class="text-3xl font-bold text-red-400">0</p>
+                        <div class="bg-indigo-50 rounded-lg p-4 text-center">
+                            <p class="text-indigo-900 text-sm">Errors</p>
+                            <p id="result-errors" class="text-3xl font-bold text-red-600">0</p>
                         </div>
                     </div>
                     
                     <div class="mb-6">
-                        <label class="block text-white/70 text-sm mb-2">Enter your cosmic callsign (optional):</label>
-                        <input type="text" id="username-input" class="cosmic-input w-full px-4 py-3 rounded-lg text-white focus:outline-none" placeholder="Anonymous Astronaut" maxlength="20">
+                        <label class="block text-indigo-900 text-sm mb-2">Enter your nickname (optional):</label>
+                        <input type="text" id="username-input" class="cosmic-input w-full px-4 py-3 rounded-lg focus:outline-none" placeholder="Anonymous Astronaut" maxlength="20">
                     </div>
                     
                     <div class="flex gap-4">
-                        <button id="save-score-btn" class="cosmic-btn flex-1 px-6 py-3 rounded-lg font-semibold">Save Score</button>
-                        <button id="close-results-btn" class="flex-1 px-6 py-3 rounded-lg font-semibold bg-white/10 hover:bg-white/20 transition-all">Try Again</button>
+                        <button id="save-score-btn" class="cosmic-btn text-white flex-1 px-6 py-3 rounded-lg font-semibold">Save Score</button>
+                        <button id="close-results-btn" class="flex-1 px-6 py-3 rounded-lg font-semibold bg-indigo-100 hover:bg-indigo-200 transition-all text-indigo-700">Try Again</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Info modal (hidden by default) -->
-            <div id="info-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden info-modal">
-                <div class="bg-gray-900 rounded-2xl p-8 max-w-2xl w-full mx-4 border border-purple-500/30">
+            <!-- Info modal -->
+            <div id="info-modal" class="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 hidden info-modal">
+                <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 border border-indigo-200 shadow-xl">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-500">About Cosmic Type</h2>
-                        <button id="close-info-btn" class="text-white/70 hover:text-white">
+                        <h2 class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-blue-600">About Meichn Typing Test</h2>
+                        <button id="close-info-btn" class="text-indigo-500 hover:text-indigo-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
@@ -185,30 +186,30 @@
                     
                     <div class="space-y-6">
                         <div>
-                            <h3 class="text-lg font-semibold mb-2 text-purple-400">How It Works</h3>
-                            <p class="text-white/70">Test your typing speed with space-themed passages. Choose your difficulty level and test duration, then type the displayed text as accurately and quickly as possible.</p>
+                            <h3 class="text-lg font-semibold mb-2 text-indigo-600">How It Works</h3>
+                            <p class="text-gray-700">Test your typing speed with space-themed passages. Choose your difficulty level and test duration, then type the displayed text as accurately and quickly as possible.</p>
                         </div>
                         
                         <div>
-                            <h3 class="text-lg font-semibold mb-2 text-purple-400">Difficulty Levels</h3>
-                            <ul class="space-y-2 text-white/70">
-                                <li><span class="font-semibold text-indigo-400">Novice:</span> Simple space facts with basic vocabulary. Perfect for beginners or casual typists.</li>
-                                <li><span class="font-semibold text-indigo-400">Pilot:</span> Moderate complexity with longer sentences about space exploration. Good for intermediate typists.</li>
-                                <li><span class="font-semibold text-indigo-400">Commander:</span> Advanced vocabulary and complex sentences about astrophysics concepts. Challenging for most typists.</li>
-                                <li><span class="font-semibold text-indigo-400">Cosmic Master:</span> Expert level with scientific terminology and intricate concepts about cosmology. Only for the most skilled typists.</li>
+                            <h3 class="text-lg font-semibold mb-2 text-indigo-600">Difficulty Levels</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><span class="font-semibold text-blue-600">Novice:</span> Simple space facts with basic vocabulary. Perfect for beginners or casual typists.</li>
+                                <li><span class="font-semibold text-blue-600">Pilot:</span> Moderate complexity with longer sentences about space exploration. Good for intermediate typists.</li>
+                                <li><span class="font-semibold text-blue-600">Commander:</span> Advanced vocabulary and complex sentences about astrophysics concepts. Challenging for most typists.</li>
+                                <li><span class="font-semibold text-blue-600">Cosmic Master:</span> Expert level with scientific terminology and intricate concepts about cosmology. Only for the most skilled typists.</li>
                             </ul>
                         </div>
                         
                         <div>
-                            <h3 class="text-lg font-semibold mb-2 text-purple-400">Test Durations</h3>
-                            <p class="text-white/70">Choose from 15 seconds (quick test), 30 seconds (brief test), 1 minute (standard test), 2 minutes (extended test), or 5 minutes (endurance test).</p>
+                            <h3 class="text-lg font-semibold mb-2 text-indigo-600">Test Durations</h3>
+                            <p class="text-gray-700">Choose from 15 seconds (quick test), 30 seconds (brief test), 1 minute (standard test), 2 minutes (extended test), or 5 minutes (endurance test).</p>
                         </div>
                         
                         <div>
-                            <h3 class="text-lg font-semibold mb-2 text-purple-400">Scoring</h3>
-                            <ul class="space-y-2 text-white/70">
-                                <li><span class="font-semibold text-indigo-400">WPM (Words Per Minute):</span> Measures your typing speed.</li>
-                                <li><span class="font-semibold text-indigo-400">Accuracy:</span> The percentage of characters typed correctly.</li>
+                            <h3 class="text-lg font-semibold mb-2 text-indigo-600">Scoring</h3>
+                            <ul class="space-y-2 text-gray-700">
+                                <li><span class="font-semibold text-blue-600">WPM (Words Per Minute):</span> Measures your typing speed.</li>
+                                <li><span class="font-semibold text-blue-600">Accuracy:</span> The percentage of characters typed correctly.</li>
                             </ul>
                         </div>
                     </div>
@@ -216,18 +217,18 @@
             </div>
 
             <!-- Leaderboard section -->
-            <div class="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
+            <div class="bg-white/50 backdrop-blur-lg rounded-2xl p-6 border border-indigo-200 shadow-lg">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl font-bold">Cosmic Rankings</h2>
+                    <h2 class="text-xl font-bold text-indigo-900">Meichn Rankings</h2>
                     <div class="flex gap-2">
-                        <select id="leaderboard-filter" class="cosmic-input px-3 py-1 rounded-lg text-white text-sm focus:outline-none">
-                            <option value="all">All Difficulties</option>
-                            <option value="easy">Novice</option>
-                            <option value="medium">Pilot</option>
-                            <option value="hard">Commander</option>
-                            <option value="expert">Cosmic Master</option>
+                        <select id="leaderboard-filter" class="cosmic-input px-3 py-1 rounded-lg text-sm focus:outline-none">
+                            <option class="bg-gray-800 text-white" value="all">All Difficulties</option>
+                            <option class="bg-gray-800 text-white" value="easy">Novice</option>
+                            <option class="bg-gray-800 text-white" value="medium">Pilot</option>
+                            <option class="bg-gray-800 text-white" value="hard">Commander</option>
+                            <option class="bg-gray-800 text-white" value="expert">Cosmic Master</option>
                         </select>
-                        <button id="refresh-leaderboard" class="p-1 rounded-lg bg-white/10 hover:bg-white/20 transition-all">
+                        <button id="refresh-leaderboard" class="p-1 rounded-lg bg-indigo-100 hover:bg-indigo-200 transition-all text-indigo-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
@@ -240,21 +241,20 @@
                 </div>
                 
                 <div id="empty-leaderboard" class="hidden text-center py-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-white/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-indigo-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
-                    <p class="text-white/50">No cosmic travelers have recorded scores yet.<br>Be the first to make your mark in the universe!</p>
+                    <p class="text-indigo-500">No travelers have recorded scores yet.<br>Be the first to make your mark in the universe!</p>
                 </div>
             </div>
         </main>
 
         <!-- Footer -->
-        <footer class="mt-8 text-center text-white/50 text-sm">
+        <footer class="mt-8 text-center text-indigo-500 text-sm">
             <p>© 2025 Meichn Typing Test | Mae Azurias </p>
         </footer>
     </div>
 
-<script src="main.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9596ba350327fec8',t:'MTc1MTU0OTMyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+    <script src="assets/js/main.js"></script>
 </body>
 </html>

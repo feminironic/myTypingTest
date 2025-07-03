@@ -1,29 +1,72 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Create stars background
-    const starsContainer = document.getElementById('stars-container');
-    for (let i = 0; i < 100; i++) {
-        const star = document.createElement('div');
-        star.classList.add('star');
-        const size = Math.random() * 3 + 1;
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        star.style.top = `${Math.random() * 100}%`;
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.animationDelay = `${Math.random() * 4}s`;
-        starsContainer.appendChild(star);
-    }
-    
-    // Create meteors
-    for (let i = 0; i < 5; i++) {
-        const meteor = document.createElement('div');
-        meteor.classList.add('meteor');
-        meteor.style.top = `${Math.random() * 100}%`;
-        meteor.style.left = `${Math.random() * 100}%`;
-        meteor.style.animationDelay = `${Math.random() * 10}s`;
-        starsContainer.appendChild(meteor);
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    themeToggle.addEventListener('click', () => {
+        if (body.classList.contains('light-mode')) {
+            body.classList.remove('light-mode');
+            body.classList.add('dark-mode');
+            updateBackgroundElements('dark');
+        } else {
+            body.classList.remove('dark-mode');
+            body.classList.add('light-mode');
+            updateBackgroundElements('light');
+        }
+    });
+
+    function updateBackgroundElements(theme) {
+        const starsContainer = document.getElementById('stars-container');
+        starsContainer.innerHTML = '';
+        if (theme === 'dark') {
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                starsContainer.appendChild(star);
+            }
+            for (let i = 0; i < 5; i++) {
+                const meteor = document.createElement('div');
+                meteor.classList.add('meteor');
+                meteor.style.top = `${Math.random() * 100}%`;
+                meteor.style.left = `${Math.random() * 100}%`;
+                meteor.style.animationDelay = `${Math.random() * 10}s`;
+                starsContainer.appendChild(meteor);
+            }
+        } else {
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 2 + 1;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 4}s`;
+                starsContainer.appendChild(star);
+            }
+            for (let i = 0; i < 5; i++) {
+                const cloud = document.createElement('div');
+                cloud.classList.add('cloud');
+                cloud.style.top = `${Math.random() * 60}%`;
+                cloud.style.animationDelay = `${Math.random() * 20}s`;
+                cloud.style.animationDuration = `${Math.random() * 60 + 60}s`;
+                cloud.innerHTML = `
+                    <svg width="${Math.random() * 100 + 100}" height="${Math.random() * 50 + 50}" viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M30 80 Q50 60 70 80 Q90 100 110 80 Q130 60 150 80 Q170 100 190 80 L190 100 L30 100 Z" fill="rgba(255, 255, 255, 0.8)" />
+                        <path d="M10 90 Q30 70 50 90 Q70 110 90 90 Q110 70 130 90 Q150 110 170 90 L170 100 L10 100 Z" fill="rgba(255, 255, 255, 0.9)" />
+                    </svg>
+                `;
+                starsContainer.appendChild(cloud);
+            }
+        }
     }
 
-    // Typing test functionality
+    updateBackgroundElements('light');
+
     const typingText = document.getElementById('typing-text');
     const typingInput = document.getElementById('typing-input');
     const startBtn = document.getElementById('start-btn');
@@ -53,7 +96,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const difficultyInfoBtn = document.getElementById('difficulty-info-btn');
     const timerInfoBtn = document.getElementById('timer-info-btn');
 
-    // Text passages by difficulty
     const passages = {
         easy: [
             "The stars shine brightly in the night sky. Space exploration has always fascinated humanity. We look up and wonder what lies beyond our planet.",
@@ -88,37 +130,40 @@ document.addEventListener('DOMContentLoaded', function() {
     let correctChars = 0;
     let currentWordIndex = 0;
     let currentCharIndex = 0;
-    let testDuration = 60; // in seconds (default)
+    let testDuration = 60;
     let leaderboard = [];
+    let passageWords = [];
+    let passagePointer = 0;
 
-    // Initialize with random text
     function initializeTest() {
         const passageArray = passages[currentDifficulty];
-        currentText = passageArray[Math.floor(Math.random() * passageArray.length)];
+        let words = [];
+        
+        const minWords = Math.ceil(testDuration * 6);
+        while (words.length < minWords) {
+            const randomPassage = passageArray[Math.floor(Math.random() * passageArray.length)];
+            words = words.concat(randomPassage.split(' '));
+        }
+        passageWords = words;
+        currentText = words.join(' ');
         typedText = '';
         currentWordIndex = 0;
         currentCharIndex = 0;
         totalChars = 0;
         correctChars = 0;
         testCompleted = false;
-        
-        // Display the text
+        passagePointer = 0;
         displayText();
-        
-        // Reset stats
         wpmElement.textContent = '0';
         accuracyElement.textContent = '0%';
         timeElement.textContent = formatTime(testDuration);
         progressBar.style.width = '0%';
-        
-        // Enable/disable elements
         typingInput.value = '';
         typingInput.disabled = true;
         startBtn.classList.remove('hidden');
         resetBtn.classList.add('hidden');
     }
 
-    // Format time display (convert seconds to min:sec if needed)
     function formatTime(seconds) {
         if (seconds < 60) {
             return `${seconds}s`;
@@ -129,31 +174,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Display text with formatting
     function displayText() {
         typingText.innerHTML = '';
-        const words = currentText.split(' ');
-        
+        const words = passageWords;
+        let charCount = 0;
         words.forEach((word, wordIndex) => {
             const wordSpan = document.createElement('span');
             wordSpan.classList.add('word');
-            
             [...word].forEach((char, charIndex) => {
                 const charSpan = document.createElement('span');
                 charSpan.textContent = char;
-                
-                // Add classes based on typing progress
-                if (wordIndex < currentWordIndex || 
+                if (wordIndex < currentWordIndex ||
                     (wordIndex === currentWordIndex && charIndex < currentCharIndex)) {
-                    if (typedText[totalChars + charIndex] === char) {
+                    if (typedText[charCount] === char) {
                         charSpan.classList.add('typed-correct');
                     } else {
                         charSpan.classList.add('typed-incorrect');
                     }
                 } else if (wordIndex === currentWordIndex && charIndex === currentCharIndex) {
                     charSpan.classList.add('typed-current');
-                    
-                    // Position cursor
                     setTimeout(() => {
                         const rect = charSpan.getBoundingClientRect();
                         const parentRect = typingText.getBoundingClientRect();
@@ -161,41 +200,31 @@ document.addEventListener('DOMContentLoaded', function() {
                         cursor.style.top = `${rect.top - parentRect.top}px`;
                     }, 0);
                 }
-                
                 wordSpan.appendChild(charSpan);
+                charCount++;
             });
-            
             typingText.appendChild(wordSpan);
-            
-            // Add space between words
             if (wordIndex < words.length - 1) {
                 const spaceSpan = document.createElement('span');
                 spaceSpan.textContent = ' ';
                 typingText.appendChild(spaceSpan);
+                charCount++;
             }
         });
     }
 
-    // Start the typing test
     function startTest() {
         testActive = true;
         testCompleted = false;
         startTime = new Date().getTime();
-        
-        // Enable input and focus
         typingInput.disabled = false;
         typingInput.focus();
-        
-        // Update UI
         startBtn.classList.add('hidden');
         resetBtn.classList.remove('hidden');
-        
-        // Start timer
         timer = setInterval(() => {
             const currentTime = new Date().getTime();
             const elapsedTime = Math.floor((currentTime - startTime) / 1000);
             const remainingTime = testDuration - elapsedTime;
-            
             if (remainingTime <= 0) {
                 endTest();
             } else {
@@ -205,46 +234,34 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 1000);
     }
 
-    // End the typing test
     function endTest() {
         testActive = false;
         testCompleted = true;
         clearInterval(timer);
-        
-        // Calculate final stats
         const elapsedTime = (new Date().getTime() - startTime) / 1000;
         const minutes = elapsedTime / 60;
-        const wpm = Math.round((typedText.length / 5) / minutes);
+        const wpm = Math.round((typedText.length / 5) / (minutes || 1/60));
         const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
         const errors = totalChars - correctChars;
-        
-        // Update results modal
         resultWpm.textContent = wpm;
         resultAccuracy.textContent = `${accuracy}%`;
         resultChars.textContent = totalChars;
         resultErrors.textContent = errors;
-        
-        // Show results modal
         resultsModal.classList.remove('hidden');
         usernameInput.focus();
-        
-        // Disable input
         typingInput.disabled = true;
     }
 
-    // Reset the test
     function resetTest() {
         clearInterval(timer);
         testActive = false;
         initializeTest();
     }
 
-    // Save score to leaderboard
     function saveScore() {
         const username = usernameInput.value.trim() || 'Anonymous Astronaut';
         const wpm = parseInt(resultWpm.textContent);
         const accuracy = parseInt(resultAccuracy.textContent);
-        
         const newScore = {
             id: Date.now().toString(),
             username,
@@ -254,95 +271,66 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: testDuration,
             timestamp: new Date().toISOString()
         };
-        
-        // Add to local leaderboard
         leaderboard.push(newScore);
-        
-        // Sort leaderboard by WPM (descending)
         leaderboard.sort((a, b) => b.wpm - a.wpm);
-        
-        // Save to localStorage
         localStorage.setItem('cosmicTypeLeaderboard', JSON.stringify(leaderboard));
-        
-        // Update leaderboard display
         displayLeaderboard();
-        
-        // Close modal
         resultsModal.classList.add('hidden');
-        
-        // Reset test
         resetTest();
     }
 
-    // Display leaderboard
     function displayLeaderboard() {
         const filter = leaderboardFilter.value;
         leaderboardContainer.innerHTML = '';
-        
-        // Filter leaderboard based on selected difficulty
-        const filteredLeaderboard = filter === 'all' 
-            ? leaderboard 
+        const filteredLeaderboard = filter === 'all'
+            ? leaderboard
             : leaderboard.filter(entry => entry.difficulty === filter);
-        
         if (filteredLeaderboard.length === 0) {
             emptyLeaderboard.classList.remove('hidden');
         } else {
             emptyLeaderboard.classList.add('hidden');
-            
-            // Display top entries
             filteredLeaderboard.slice(0, 9).forEach((entry, index) => {
                 const rankCard = document.createElement('div');
-                rankCard.classList.add('rank-card', 'bg-white/5', 'rounded-lg', 'p-4', 'border', 'border-white/10');
-                
-                // Add medal for top 3
+                rankCard.classList.add('rank-card', 'bg-white/70', 'rounded-lg', 'p-4', 'border', 'border-indigo-200', 'shadow');
                 let medalEmoji = '';
                 if (index === 0) medalEmoji = '🥇 ';
                 else if (index === 1) medalEmoji = '🥈 ';
                 else if (index === 2) medalEmoji = '🥉 ';
-                
-                // Format difficulty name
                 let difficultyName = '';
-                switch(entry.difficulty) {
+                switch (entry.difficulty) {
                     case 'easy': difficultyName = 'Novice'; break;
                     case 'medium': difficultyName = 'Pilot'; break;
                     case 'hard': difficultyName = 'Commander'; break;
                     case 'expert': difficultyName = 'Cosmic Master'; break;
                 }
-                
-                // Format timestamp
                 const date = new Date(entry.timestamp);
-                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
-                
-                // Format duration
+                const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
                 const durationText = formatTime(entry.duration || 60);
-                
                 rankCard.innerHTML = `
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-lg">${medalEmoji}${entry.username}</h3>
-                        <span class="text-xs text-white/50">${formattedDate}</span>
+                        <h3 class="font-bold text-lg text-indigo-900">${medalEmoji}${entry.username}</h3>
+                        <span class="text-xs text-indigo-500">${formattedDate}</span>
                     </div>
                     <div class="flex justify-between items-center">
                         <div>
-                            <span class="text-2xl font-bold text-purple-400">${entry.wpm}</span>
-                            <span class="text-white/70 text-sm">WPM</span>
+                            <span class="text-2xl font-bold text-indigo-600">${entry.wpm}</span>
+                            <span class="text-indigo-900 text-sm">WPM</span>
                         </div>
                         <div class="text-right">
-                            <span class="text-white/70 text-sm">Accuracy</span>
-                            <span class="ml-1 text-indigo-400">${entry.accuracy}%</span>
+                            <span class="text-indigo-900 text-sm">Accuracy</span>
+                            <span class="ml-1 text-blue-600">${entry.accuracy}%</span>
                         </div>
                     </div>
-                    <div class="mt-2 flex justify-between text-xs text-white/50">
-                        <span class="px-2 py-1 rounded-full bg-white/10">${difficultyName}</span>
-                        <span class="px-2 py-1 rounded-full bg-white/10">${durationText} test</span>
+                    <div class="mt-2 flex justify-between text-xs">
+                        <span class="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700">${difficultyName}</span>
+                        <span class="px-2 py-1 rounded-full bg-indigo-100 text-indigo-700">${durationText} test</span>
                     </div>
                 `;
-                
                 leaderboardContainer.appendChild(rankCard);
             });
         }
     }
 
-    // Load leaderboard from localStorage
     function loadLeaderboard() {
         const savedLeaderboard = localStorage.getItem('cosmicTypeLeaderboard');
         if (savedLeaderboard) {
@@ -351,7 +339,6 @@ document.addEventListener('DOMContentLoaded', function() {
         displayLeaderboard();
     }
 
-    // Event listeners
     startBtn.addEventListener('click', startTest);
     resetBtn.addEventListener('click', resetTest);
     saveScoreBtn.addEventListener('click', saveScore);
@@ -359,31 +346,24 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsModal.classList.add('hidden');
         resetTest();
     });
-    
     leaderboardFilter.addEventListener('change', displayLeaderboard);
     refreshLeaderboardBtn.addEventListener('click', displayLeaderboard);
 
-    // Info modal
     infoBtn.addEventListener('click', () => {
         infoModal.classList.remove('hidden');
     });
-    
     closeInfoBtn.addEventListener('click', () => {
         infoModal.classList.add('hidden');
     });
-    
     difficultyInfoBtn.addEventListener('click', () => {
         infoModal.classList.remove('hidden');
     });
-    
     timerInfoBtn.addEventListener('click', () => {
         infoModal.classList.remove('hidden');
     });
 
-    // Handle difficulty selection
     difficultyBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Only allow changing difficulty when test is not active
             if (!testActive) {
                 difficultyBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -393,10 +373,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Handle timer selection
     timerBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Only allow changing timer when test is not active
             if (!testActive) {
                 timerBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
@@ -407,57 +385,41 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Handle typing input
     typingInput.addEventListener('input', () => {
         if (!testActive || testCompleted) return;
-        
         const inputValue = typingInput.value;
         const lastChar = inputValue.charAt(inputValue.length - 1);
-        
-        // Check if space was typed (word completed)
+        const words = passageWords;
+        const currentWord = words[currentWordIndex] || '';
+        const typedWord = inputValue.trim();
         if (lastChar === ' ') {
-            const words = currentText.split(' ');
-            const currentWord = words[currentWordIndex];
-            const typedWord = inputValue.trim();
-            
-            // Update character counts
             for (let i = 0; i < typedWord.length; i++) {
                 totalChars++;
                 if (i < currentWord.length && typedWord[i] === currentWord[i]) {
                     correctChars++;
                 }
             }
-            
-            // Move to next word
             currentWordIndex++;
             currentCharIndex = 0;
             typedText += typedWord + ' ';
             typingInput.value = '';
-            
-            // Check if test is complete
-            if (currentWordIndex >= currentText.split(' ').length) {
-                endTest();
-                return;
+            if (currentWordIndex >= passageWords.length - 10) {
+                const passageArray = passages[currentDifficulty];
+                const extraWords = passageArray[Math.floor(Math.random() * passageArray.length)].split(' ');
+                passageWords = passageWords.concat(extraWords);
             }
         } else {
-            // Update current character index
             currentCharIndex = inputValue.length;
         }
-        
-        // Update display
         displayText();
-        
-        // Calculate and update stats
         const elapsedTime = (new Date().getTime() - startTime) / 1000;
         const minutes = elapsedTime / 60;
-        const wpm = Math.round((typedText.length / 5) / minutes);
+        const wpm = Math.round((typedText.length / 5) / (minutes || 1/60));
         const accuracy = totalChars > 0 ? Math.round((correctChars / totalChars) * 100) : 0;
-        
         wpmElement.textContent = wpm;
         accuracyElement.textContent = `${accuracy}%`;
     });
 
-    // Close modals when clicking outside
     window.addEventListener('click', (e) => {
         if (e.target === resultsModal) {
             resultsModal.classList.add('hidden');
@@ -468,7 +430,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize
     initializeTest();
     loadLeaderboard();
 });
