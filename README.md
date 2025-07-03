@@ -1,5 +1,4 @@
 <h1 align="center">☄️ Meichn Typing Test 🚀</h1>
-<p align="center"><i>“Type among the stars — where speed meets silence.”</i></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Speed-WPM%20Tracker-FFC1E3?style=for-the-badge" />
